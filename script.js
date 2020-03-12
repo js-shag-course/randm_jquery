@@ -8,7 +8,10 @@ $(function () {
 	let info = null
 
 	modal.hide()
-	loadData(apiLink)
+	loadData(apiLink, '#chars')
+
+	$('.tab-container').hide()
+	$('.tab-container').first().show()
 
 	$(document).on('click', '.list-item', function (e) {
 		let index = $(this).data('index')
@@ -16,21 +19,33 @@ $(function () {
 		modal.show()
 	})
 
+	$('.tabs a').on('click', function (e) {
+		let tab = $(this)
+
+		$('.tabs a').removeClass('current')
+		tab.addClass('current')
+
+		$('.tab-container').hide(500)
+		$(tab.attr('href')).show(500)
+
+		e.preventDefault()
+	})
+
 	$('.hide-modal').on('click', function () {
 		modal.hide()
 	})
 
 	$('.load-more').on('click', function () {
-		loadData(info.next)
+		loadData(info.next, '#chars')
 	})
 
-	function loadData (apiLink) {
+	function loadData (apiLink, selector) {
 		$.get( apiLink, function (data) {
 			list = [...list, ...data.results]
 			info = data.info
 
 			fillStats()
-			renderList()
+			renderList(selector)
 
 		})
 	}
@@ -40,8 +55,8 @@ $(function () {
 		$('.total-chars').text(info.count)
 	}
 
-	function renderList () {
-		$('#list').html('')
+	function renderList (selector) {
+		$(selector + ' .list-data').html('')
 		$.each(list, function (index, item) {
 			let row = `<div class="list-item" data-index="${index}">
 				<div>${ index + 1 }. ${ item.name }</div>
@@ -54,7 +69,7 @@ $(function () {
 					</svg>
 				</div>
 			</div>`
-			$('#list').append(row)
+			$(selector + ' .list-data').append(row)
 		})
 	}
 

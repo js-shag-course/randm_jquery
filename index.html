@@ -15,12 +15,31 @@
     </header>
   
     <section>
+      <div class="container tabs">
+        <a href="#chars" class="current">Characters</a>
+        <a href="#locations">Locations</a>
+        <a href="#episodes">Episodes</a>
+        <a href="#search">Search</a>
+      </div>
       <div class="container counter">
         <span class="loaded-chars">---</span> / 
         <span class="total-chars">---</span>
       </div>
-      <div class="container" id="list">
-        <!-- data here -->
+      <div class="container tab-container" id="chars">
+        <h2>Characters</h2>
+        <div class="list-data"></div>
+      </div>
+      <div class="container tab-container" id="locations">
+        <h2>Locations</h2>
+        <div class="list-data"></div>
+      </div>
+      <div class="container tab-container" id="episodes">
+        <h2>Episodes</h2>
+        <div class="list-data"></div>
+      </div>
+      <div class="container tab-container" id="search">
+        <h2>Search</h2>
+        <div class="list-data"></div>
       </div>
       <div class="container">
         <button class="load-more">load more</button>
@@ -33,7 +52,7 @@
       </div>
     </footer>
   
-    <div class="modal" id="modal">
+    <div class="modal" id="modal" style="display: none;">
       <div class="modal-title">
         <div>{{ Window Title }}</div>
         <div class="hide-modal">
